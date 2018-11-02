@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[destroy]
+
   def index
     files = []
     Upload.all.each { |u| u.files.each { |f| files << { id: f.record.id, title: f.record.title, file: f, filename: f.filename.to_s } } }
@@ -13,14 +14,11 @@ class UploadsController < ApplicationController
   def create
     @upload = Upload.new(upload_params)
 
-
     if @upload.save
-      redirect_to root_path
-      flash[:success] = "File successfully uploaded"
+      redirect_to root_path, notice: "File successfully uploaded"
     else
       @upload.files.purge_later
-      redirect_to root_path
-      flash[:danger] = "An error occurred. Please try again."
+      redirect_to root_path, alert: "An error occurred. Please try again."
     end
   end
 
@@ -30,14 +28,14 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path }
       format.json { head :no_content }
-      flash[:success] = "File successfully deleted"
+      flash[:notice] = "File successfully deleted"
     end
   end
 
   private
 
   def upload_params
-    params.require(:upload).permit(:title, files: [])
+    params.permit(:title, files: [])
   end
 
   def set_upload

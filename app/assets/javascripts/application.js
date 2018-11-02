@@ -56,3 +56,9 @@ addEventListener("direct-upload:end", event => {
   const element = document.getElementById(`direct-upload-${id}`)
   element.classList.add("direct-upload--complete")
 })
+
+window.setTimeout(function() {
+  $(".alert").fadeTo(2000, 0).slideUp(2000, function(){
+      $(this).remove();
+  });
+}, 3000);

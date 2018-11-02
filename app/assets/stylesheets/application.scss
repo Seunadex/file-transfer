@@ -14,7 +14,24 @@
 
 @import 'bootstrap';
 @import "font-awesome";
+@import "uploads";
 
+body {
+  background: -webkit-linear-gradient(left, #af8d31, #0081ff);
+
+  .container {
+    background: #fff;
+    height: 100vh;
+  }
+
+  .alert {
+    position: absolute;
+    width: 30%;
+    top: 70px;
+    right: 100px;
+    z-index: 1;
+  }
+}
 
 .direct-upload {
   display: inline-block;
@@ -37,7 +54,7 @@
   left: 0;
   bottom: 0;
   opacity: 0.2;
-  background: #0076ff;
+  background: #09f587;
   transition: width 120ms ease-out, opacity 60ms 60ms ease-in;
   transform: translate3d(0, 0, 0);
 }
